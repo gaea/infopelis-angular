@@ -1,0 +1,9 @@
+<center>
+  <div class="row">
+    <div class="col-md-3" ng-repeat="movie in movies">
+      <a href="#/movies/{{movie.id}}" ><img ng-src="http://image.tmdb.org/t/p/w300/{{movie.poster_path}}" alt="{{movie.title}}" class="thumb"></a>
+      <a href="#/movies/{{movie.id}}">{{movie.title}}</a>
+      <p>{{movie.description}}</p>
+    </div>
+  </div>
+</center>

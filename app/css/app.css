@@ -1,0 +1,49 @@
+.thumbnail-actor {
+	width:140px; 
+	height:190px;
+}
+.thumbnail-actor-list {
+	width:140px; 
+	height:190px;
+}
+.img-actor {
+	width:160px; 
+	height:230px;
+}
+.img-actor-list {
+	width:130px; 
+	height:180px;
+}
+.img-no-actor-list {
+	width:130px; 
+	height:180px;
+}
+.img-no-actor {
+	width:130px; 
+	height:180px;
+}
+dt, dd {
+  min-height: 25px;
+  max-height: 120px;
+  overflow-y:auto;
+}
+.thumbnail-movie {
+	width:140px; 
+	height:190px;
+}
+.thumbnail-movie-list {
+	width:140px; 
+	height:190px;
+}
+.img-movie-list {
+	width:130px; 
+	height:180px;
+}
+.img-no-movie-list {
+	width:120px; 
+	height:170px;
+}
+.img-no-movie {
+	width:130px; 
+	height:180px;
+}
