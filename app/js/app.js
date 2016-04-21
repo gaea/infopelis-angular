@@ -5,6 +5,8 @@
 var infopelisApp = angular.module('infopelisApp', [
   'movieController',
   'movieService',
+  'actorController',
+  'actorService',
   'movieDirective',
   'infopelisConfigs',
   'infopelisRoutes'

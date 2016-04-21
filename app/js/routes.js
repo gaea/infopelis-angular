@@ -11,9 +11,13 @@ infopelisRoutes.config(['$routeProvider',
         templateUrl: 'partials/movie-list.html',
         controller: 'MovieListCtrl'
       }).
-      when('/movies/:movieId', {
+      when('/movie/:movieId', {
         templateUrl: 'partials/movie-detail.html',
         controller: 'MovieDetailCtrl'
+      }).
+      when('/actor/:actorId', {
+        templateUrl: 'partials/actor-detail.html',
+        controller: 'ActorDetailCtrl'
       }).
       otherwise({
         redirectTo: '/movies'

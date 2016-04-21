@@ -8,7 +8,7 @@ actorService.factory('ActorService', ['$http', 'API_KEY', 'API_URL',
 	function($http, API_KEY, API_URL) {
 		return {
 			get: function(actorId) {
-				var url = API_URL + "/people/" + actorId + "?api_key=" + API_KEY;
+				var url = API_URL + "/person/" + actorId + "?api_key=" + API_KEY + "&append_to_response=movies,trailers,images,credits";
 				return $http.get(url); 
 			},
 			search: function(query, page) {

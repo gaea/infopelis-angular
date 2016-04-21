@@ -1,78 +1,81 @@
 <div class="container-fluid">
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title text-center">{{ movie.title }}</h3>
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">{{ movie.title }}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<center>
+								<div class="img-thumbnail pull-right col-middle">
+									<img ng-src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" alt="{{ movie.title }}" class="img-responsive" ng-show="movie.poster_path"/>
+									<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+								</div>
+							</center>
+						</div>
+						<div class="col-sm-9">
+							<dl class="dl-horizontal">
+								<dt>Original title</dt>
+								<dd>{{ movie.original_title }}</dd>
+								<dt>Overview</dt>
+								<dd>{{ movie.overview }}</dd>
+								<dt>Release date</dt>
+								<dd>{{ movie.release_date }}</dd>
+								<dt>Status</dt>
+								<dd>{{ movie.status }}</dd>
+								<dt>Homepage</dt>
+								<dd><a target="_blank" href="{{movie.homepage}}">{{movie.homepage}}</a></dd>
+								<dt>Genres</dt>
+								<dd><span ng-repeat="genre in movie.genres">{{ genre.name }}. </span></dd>
+								<dt>Cast</dt>
+								<dd>
+									<div ng-repeat="actor in movie.credits.cast">
+										<a href="#/actor/{{actor.id}}">{{actor.name}}</a>, {{actor.character}}
+									</div>
+								</dd>
+							</dl>
+						</div>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-sm-3">
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-title text-center">Posters</h4>
+							<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
 								<center>
-									<div class="img-thumbnail pull-right col-middle">
-										<img ng-src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" alt="{{ movie.title }}" class="img-responsive" ng-show="movie.poster_path"/>
-										<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+									<div class="img-thumbnail col-middle">
+										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{poster.file_path}}" >
+											<img ng-src="http://image.tmdb.org/t/p/w300/{{poster.file_path}}" alt="{{movie.title}}" class="img-responsive">
+										</a>
+										<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="poster.file_path"/>
 									</div>
 								</center>
 							</div>
-							<div class="col-sm-9">
-								<dl class="dl-horizontal">
-									<dt>Original title</dt>
-									<dd>{{ movie.original_title }}</dd>
-									<dt>Overview</dt>
-									<dd>{{ movie.overview }}</dd>
-									<dt>Release date</dt>
-									<dd>{{ movie.release_date }}</dd>
-									<dt>Status</dt>
-									<dd>{{ movie.status }}</dd>
-									<dt>Homepage</dt>
-									<dd><a target="_blank" href="{{movie.homepage}}">{{movie.homepage}}</a></dd>
-									<dt>Genres</dt>
-									<dd ng-repeat="genre in movie.genres">
-										{{ genre.name }}.
-									</dd>
-								</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-title text-center">Trailers</h4>
+							<div class="col-md-3" ng-repeat="trailer in movie.trailers.youtube | limitTo:12">
+								<center>
+									<div class="img-thumbnail col-middle">
+										<youtube-video width="320" height="180" video-id="trailer.source"></youtube-video>
+									</div>
+								</center>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<h4 class="text-title text-center">Posters</h4>
-								<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
-									<center>
-										<div class="img-thumbnail col-middle">
-											<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{poster.file_path}}" >
-												<img ng-src="http://image.tmdb.org/t/p/w300/{{poster.file_path}}" alt="{{movie.title}}" class="img-responsive">
-											</a>
-											<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="poster.file_path"/>
-										</div>
-									</center>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<h4 class="text-title text-center">Trailers</h4>
-								<div class="col-md-3" ng-repeat="trailer in movie.trailers.youtube | limitTo:12">
-									<center>
-										<div class="img-thumbnail col-middle">
-											<youtube-video width="320" height="180" video-id="trailer.source"></youtube-video>
-										</div>
-									</center>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-sm-12">
-								<h4 class="text-title text-center">Cast</h4>
-								<div class="col-md-2" ng-repeat="actor in movie.credits.cast">
-									<center>
-										<div class="img-thumbnail col-middle">
-											<a href="#/actor/{{actor.id}}" ><img class="img-responsive" ng-src="http://image.tmdb.org/t/p/w150/{{actor.profile_path}}" alt="{{actor.name}}"></a>
-										    <a href="#/actor/{{actor.id}}">{{actor.name}}</a>
-										    <p>{{actor.character}}</p>
-										</div>
-									</center>
-								</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-title text-center">Cast</h4>
+							<div class="col-md-2" ng-repeat="actor in movie.credits.cast">
+								<center>
+									<div class="img-thumbnail col-middle">
+										<a href="#/actor/{{actor.id}}" ><img class="img-responsive" ng-src="http://image.tmdb.org/t/p/w150/{{actor.profile_path}}" alt="{{actor.name}}"></a>
+									    <a href="#/actor/{{actor.id}}">{{actor.name}}</a>
+									    <p>{{actor.character}}</p>
+									</div>
+								</center>
 							</div>
 						</div>
 					</div>
@@ -80,3 +83,4 @@
 			</div>
 		</div>
 	</div>
+</div>

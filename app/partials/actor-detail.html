@@ -1,0 +1,60 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title text-center">{{ movie.title }}</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-sm-3">
+							<center>
+								<div class="img-thumbnail pull-right col-middle">
+									<img ng-src="https://image.tmdb.org/t/p/w300/{{ actor.profile_path }}" alt="{{ movie.title }}" class="img-responsive" ng-show="actor.profile_path"/>
+									<img ng-src="img/no-movie-image.png" alt="{{ actor.name }}" class="img-responsive img-no-movie" ng-hide="actor.profile_path"/>
+								</div>
+							</center>
+						</div>
+						<div class="col-sm-9">
+							<dl class="dl-horizontal">
+								<dt>Name</dt>
+								<dd>{{ actor.name }}</dd>
+								<dt>Biography</dt>
+								<dd>{{ actor.biography }}</dd>
+								<dt>Birthday</dt>
+								<dd>{{ actor.birthday }}</dd>
+								<dt>Place of birth</dt>
+								<dd>{{ actor.place_of_birth }}</dd>
+								<dt>Homepage</dt>
+								<dd><a target="_blank" href="{{actor.homepage}}">{{actor.homepage}}</a></dd>
+								<dt>Also known as</dt>
+								<dd><span ng-repeat="aka in actor.also_known_as">{{aka}}. </span></dd>
+								<dt>Movies</dt>
+								<dd>
+									<div ng-repeat="movie in actor.credits.cast">
+										<a href="#/movie/{{movie.id}}">{{movie.title}}</a>, {{movie.character}} - {{movie.release_date}}
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-title text-center">Posters</h4>
+							<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
+								<center>
+									<div class="img-thumbnail col-middle">
+										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{poster.file_path}}" >
+											<img ng-src="http://image.tmdb.org/t/p/w300/{{poster.file_path}}" alt="{{movie.title}}" class="img-responsive">
+										</a>
+										<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="poster.file_path"/>
+									</div>
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
