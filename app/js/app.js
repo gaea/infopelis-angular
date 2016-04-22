@@ -9,5 +9,6 @@ var infopelisApp = angular.module('infopelisApp', [
   'actorService',
   'movieDirective',
   'infopelisConfigs',
-  'infopelisRoutes'
+  'infopelisRoutes',
+  'jkuri.gallery'
 ]);

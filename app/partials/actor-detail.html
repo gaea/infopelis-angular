@@ -1,16 +1,16 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
-			<div class="panel panel-default">
+			<div class="panel panel-default" ng-show="actor">
 				<div class="panel-heading">
-					<h3 class="panel-title text-center">{{ movie.title }}</h3>
+					<h3 class="panel-title text-center">{{ actor.name }}</h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-sm-3">
 							<center>
 								<div class="img-thumbnail pull-right col-middle">
-									<img ng-src="https://image.tmdb.org/t/p/w300/{{ actor.profile_path }}" alt="{{ movie.title }}" class="img-responsive" ng-show="actor.profile_path"/>
+									<img ng-src="https://image.tmdb.org/t/p/w300/{{ actor.profile_path }}" alt="{{ actor.name }}" class="img-responsive" ng-show="actor.profile_path"/>
 									<img ng-src="img/no-movie-image.png" alt="{{ actor.name }}" class="img-responsive img-no-movie" ng-hide="actor.profile_path"/>
 								</div>
 							</center>
@@ -40,14 +40,39 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12">
-							<h4 class="text-title text-center">Posters</h4>
-							<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
+							<h4 class="text-title text-center">Images</h4>
+								<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
+							</div>
+						</div>
+					</div>
+					<!--<div class="row" ng-show="actor.images.profiles.length">
+						<div class="col-sm-12">
+							<h4 class="text-title text-center">Images</h4>
+							<div class="col-md-1" ng-repeat="image in actor.images.profiles | limitTo:36">
 								<center>
 									<div class="img-thumbnail col-middle">
-										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{poster.file_path}}" >
-											<img ng-src="http://image.tmdb.org/t/p/w300/{{poster.file_path}}" alt="{{movie.title}}" class="img-responsive">
+										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{image.file_path}}" >
+											<img ng-src="http://image.tmdb.org/t/p/w300/{{image.file_path}}" alt="{{actor.name}}" class="img-responsive" ng-show="image.file_path">
+											<img ng-src="img/no-movie-image.png" alt="{{ actor.name }}" class="img-responsive img-no-movie" ng-hide="image.file_path"/>
 										</a>
-										<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="poster.file_path"/>
+									</div>
+								</center>
+							</div>
+						</div>
+					</div>-->
+					<div class="row">
+						<div class="col-sm-12">
+							<h4 class="text-title text-center">Movies</h4>
+							<div class="col-md-2" ng-repeat="movie in actor.credits.cast">
+								<center>
+									<div class="img-thumbnail col-middle">
+										<a href="#/movie/{{movie.id}}" >
+											<img class="img-responsive" ng-src="http://image.tmdb.org/t/p/w150/{{movie.poster_path}}" alt="{{movie.title}}" ng-show="movie.poster_path">
+											<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+										</a>
+									    <a href="#/movie/{{movie.id}}">{{movie.title}}</a>
+									    <p>{{movie.release_date}}</p>
+									    <p>{{movie.character}}</p>
 									</div>
 								</center>
 							</div>

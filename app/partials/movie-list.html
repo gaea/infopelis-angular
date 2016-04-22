@@ -1,9 +1,18 @@
 <center>
   <div class="row">
     <div class="col-md-3" ng-repeat="movie in movies">
-      <a href="#/movie/{{movie.id}}" ><img ng-src="http://image.tmdb.org/t/p/w300/{{movie.poster_path}}" alt="{{movie.title}}" class="thumb"></a>
-      <a href="#/movie/{{movie.id}}">{{movie.title}}</a>
-      <p>{{movie.description}}</p>
+      <center>
+        <div class="img-thumbnail col-middle">
+          <a href="#/movie/{{movie.id}}" >
+            <img ng-src="http://image.tmdb.org/t/p/w300/{{movie.poster_path}}" alt="{{movie.title}}" class="img-responsive" ng-show="movie.poster_path">
+            <img ng-src="img/no-movie-image.png" alt="{{movie.title}}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+          </a>
+          <a href="#/movie/{{movie.id}}">{{movie.title}}</a>
+          <p>{{movie.release_date}}</p>
+        </div>
+      </center>
     </div>
   </div>
+  <button ng-click="loadBackPage()">Back</button>
+  <button ng-click="loadNextPage()">Next</button>
 </center>

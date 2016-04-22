@@ -47,3 +47,17 @@ dt, dd {
 	width:130px; 
 	height:180px;
 }
+
+img.ng-thumb {
+    height: 150px !important;
+    float: left !important;
+    display: block !important;
+    cursor: pointer !important;
+    margin: 2px 15px 0 0 !important;
+}
+
+.ng-gallery {
+	height: 170px !important;
+	overflow-x: scroll !important;
+	display: flex !important;
+}
