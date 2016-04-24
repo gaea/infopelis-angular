@@ -13,6 +13,7 @@
     "angular-route": "1.4.x",
     "angular-resource": "1.4.x",
     "angular-animate": "1.4.x",
-    "ngGallery": "*"
+    "ngGallery": "*",
+    "angular-youtube-mb": "1.2.0"
   }
 }
