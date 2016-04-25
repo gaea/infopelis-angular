@@ -4,19 +4,19 @@
 
 var movieService = angular.module('movieService', []);
 
-movieService.factory('MovieService', ['$http', 'API_KEY', 'API_URL',
-	function($http, API_KEY, API_URL) {
+movieService.factory('MovieService', ['$http', 'TMDB_API',
+	function($http, TMDB_API) {
 		return {
 			getMovie: function(movieId) {
-				var url = API_URL + "/movie/" + movieId + "?api_key=" + API_KEY + "&append_to_response=releases,trailers,images,credits&include_image_language=en,null";
+				var url = TMDB_API.URL + "/movie/" + movieId + "?api_key=" + TMDB_API.KEY + "&append_to_response=releases,trailers,images,credits&include_image_language=en,null";
 				return $http.get(url); 
 			},
 			discover: function(page) {
-				var url = API_URL + "/discover/movie?api_key=" + API_KEY + "&page=" + page;
+				var url = TMDB_API.URL + "/discover/movie?api_key=" + TMDB_API.KEY + "&page=" + page;
 				return $http.get(url); 
 			},
 			search: function(query, page) {
-				var url = API_URL + "/search/movie?api_key=" + API_KEY + "&query=" + query + "&page=" + page;
+				var url = TMDB_API.URL + "/search/movie?api_key=" + TMDB_API.KEY + "&query=" + query + "&page=" + page;
 				return $http.get(url); 
 			}
 		};

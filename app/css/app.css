@@ -24,7 +24,7 @@
 }
 dt, dd {
   min-height: 25px;
-  max-height: 120px;
+  max-height: 140px;
   overflow-y:auto;
 }
 .thumbnail-movie {

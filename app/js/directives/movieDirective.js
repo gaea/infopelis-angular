@@ -2,8 +2,7 @@
 
 /* Directives */
 
-var movieDirective = angular.module('movieDirective', [
-  'youtube-embed']);
+var movieDirective = angular.module('movieDirective', []);
 
 movieController.directive('movie', function() {
   return {

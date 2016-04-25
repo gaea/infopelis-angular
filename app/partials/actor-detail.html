@@ -17,18 +17,15 @@
 						</div>
 						<div class="col-sm-9">
 							<dl class="dl-horizontal">
-								<dt>Name</dt>
-								<dd>{{ actor.name }}</dd>
-								<dt>Biography</dt>
-								<dd>{{ actor.biography }}</dd>
-								<dt>Birthday</dt>
-								<dd>{{ actor.birthday }}</dd>
-								<dt>Place of birth</dt>
-								<dd>{{ actor.place_of_birth }}</dd>
-								<dt>Homepage</dt>
-								<dd><a target="_blank" href="{{actor.homepage}}">{{actor.homepage}}</a></dd>
+								<dt>Name</dt><dd>{{ actor.name }}</dd>
+								<dt>Biography</dt><dd>{{ actor.biography }}</dd>
+								<dt>Birthday</dt><dd>{{ actor.birthday }}</dd>
+								<dt>Place of birth</dt><dd>{{ actor.place_of_birth }}</dd>
+								<dt>Homepage</dt><dd><a target="_blank" href="{{actor.homepage}}">{{actor.homepage}}</a></dd>
 								<dt>Also known as</dt>
-								<dd><span ng-repeat="aka in actor.also_known_as">{{aka}}. </span></dd>
+								<dd>
+									<span ng-repeat="aka in actor.also_known_as">{{aka}}. </span>
+								</dd>
 								<dt>Movies</dt>
 								<dd>
 									<div ng-repeat="movie in actor.credits.cast">
@@ -63,19 +60,22 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Movies</h4>
-							<div class="col-md-2" ng-repeat="movie in actor.credits.cast">
-								<center>
-									<div class="img-thumbnail col-middle">
+							<center ng-repeat="movie in actor.credits.cast">
+								<div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
+								<div class="clearfix visible-sm" ng-if="$index%3==0"></div>
+								<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+									<a href="#/movie/{{movie.id}}"><h5>{{movie.title}}<br/>
+								    <small>{{movie.release_date}}</small><br/>
+								    <small>- {{movie.character}} -</small><br/>
+								    <h5></a>
+									<div class="img-thumbnail thumbnail-movie-list col-middle">
 										<a href="#/movie/{{movie.id}}" >
-											<img class="img-responsive" ng-src="http://image.tmdb.org/t/p/w150/{{movie.poster_path}}" alt="{{movie.title}}" ng-show="movie.poster_path">
-											<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+											<img class="item img-responsive img-movie-list" ng-src="http://image.tmdb.org/t/p/w130/{{movie.poster_path}}" alt="{{movie.title}}" ng-show="movie.poster_path">
+											<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="item img-responsive img-no-movie-list" ng-hide="movie.poster_path"/>
 										</a>
-									    <a href="#/movie/{{movie.id}}">{{movie.title}}</a>
-									    <p>{{movie.release_date}}</p>
-									    <p>{{movie.character}}</p>
 									</div>
-								</center>
-							</div>
+								</div>
+							</center>
 						</div>
 					</div>
 				</div>
