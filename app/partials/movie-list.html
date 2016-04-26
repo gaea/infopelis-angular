@@ -1,18 +1,74 @@
-<center>
-  <div class="row">
-    <div class="col-md-3" ng-repeat="movie in movies">
-      <center>
-        <div class="img-thumbnail col-middle">
-          <a href="#/movie/{{movie.id}}" >
-            <img ng-src="http://image.tmdb.org/t/p/w300/{{movie.poster_path}}" alt="{{movie.title}}" class="img-responsive" ng-show="movie.poster_path">
-            <img ng-src="img/no-movie-image.png" alt="{{movie.title}}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
-          </a>
-          <a href="#/movie/{{movie.id}}">{{movie.title}}</a>
-          <p>{{movie.release_date}}</p>
+<div class="container">
+  <div class="page-header">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">InfoPelis - AngularJS</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+          <form class="navbar-form navbar-right" action="" method="get">
+            <div class="form-group">
+              <input type="text" class="form-control" name="movie" placeholder="Search by Movie's Title">
+            </div>
+            <button type="submit" class="btn btn-default btn-primary">Find Movies</button>
+          </form>
+          <form class="navbar-form navbar-right" action="" method="get">
+            <div class="form-group">
+              <input type="text" class="form-control" name="actor" placeholder="Search by Actor's Name">
+            </div>
+            <button type="submit" class="btn btn-default btn-primary">Find Actors</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row page-header">
+    <div class="col-md-3 pull-left">
+      <h4 class="text-primary" ng-show="search">Movie search results:</h4>
+      <h4 class="text-primary" ng-hide="search">Discover Movies</h4>
+    </div>      
+    <div class="col-md-2 pull-right">
+      <a class="btn btn-default btn-primary" ng-click="order('release_date')">Sort By Release Date</a>
+    </div>
+    <div class="col-md-2 pull-right">
+      <a class="btn btn-default btn-primary" ng-click="order('title')">Sort By Title</a>
+    </div>
+  </div>
+
+  <center>
+    <div class="row">
+      <center ng-repeat="movie in movies">
+        <div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
+        <div class="clearfix visible-sm" ng-if="$index%3==0"></div>
+        <div class="col-md-3">
+          <h5>
+            <a href="#/movie/{{movie.id}}">{{movie.title}}</a><br/>
+            <small>Release date: {{movie.release_date}}</small>
+          </h5>
+          <div class="img-thumbnail col-middle">
+            <a href="#/movie/{{movie.id}}" >
+              <img ng-src="http://image.tmdb.org/t/p/w150/{{movie.poster_path}}" alt="{{movie.title}}" class="img-responsive" ng-show="movie.poster_path">
+              <img ng-src="img/no-movie-image.png" alt="{{movie.title}}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+            </a>
+          </div>
         </div>
       </center>
     </div>
-  </div>
-  <button ng-click="loadBackPage()">Back</button>
-  <button ng-click="loadNextPage()">Next</button>
-</center>
+    <br/>
+    <!--<button class="btn btn-default btn-primary" ng-click="loadBackPage()">Back</button>-->
+    <button class="btn btn-default btn-primary" ng-click="loadNextPage()">More</button>
+  </center>
+  <center>
+    <hr/>
+    <a class="text-primary" href="https://github.com/gaea/infopelis-angular" target="_blank">infopelis - </a>
+    <a class="text-primary" href="https://gaea-uv@blogspot.com" target="_blank">gaea-uv - </a>
+    <span class="text-primary">{{date | date:'yyyy'}}<br/><br/></a>
+  </center>
+</div>
