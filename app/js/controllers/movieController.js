@@ -8,16 +8,23 @@ movieController.controller('MovieListCtrl', ['$scope', '$filter', '$routeParams'
   function($scope, $filter, $routeParams, MovieService) {
     $scope.movies = [];
     $scope.page = 1;
+    $scope.searchPage = 1;
     $scope.search = false;
     $scope.date = new Date();
     $scope.predicate = 'release_date';
     $scope.reverse = false;
+    $scope.queryMovie = "";
     var orderBy = $filter('orderBy');
     
 
     $scope.loadNextPage = function() {
-      $scope.page += 1;
-      $scope.loadPage($scope.page);
+      if($scope.queryMovie == "") {
+        $scope.page += 1;
+        $scope.loadPage($scope.page);
+      }
+      else {
+        $scope.searchMovie($scope.searchPage);
+      }
     }
 
     $scope.loadBackPage = function() {
@@ -34,6 +41,28 @@ movieController.controller('MovieListCtrl', ['$scope', '$filter', '$routeParams'
       $scope.movies = orderBy($scope.movies, predicate, $scope.reverse);
     };
 
+    $scope.searchMovie = function(page) {
+      $scope.searchPage = page;
+
+      if($scope.queryMovie != "") {
+        MovieService.search($scope.queryMovie, page).success(function(movies){
+          if($scope.searchPage == 1) {
+            $scope.searchPage += 1;
+            $scope.movies = movies.results;
+          }
+          else {
+            $scope.searchPage += 1;
+            $scope.movies = $scope.movies.concat(movies.results);
+          }
+        }).error(function(error){
+          console.log(error.status_code + error.status_message);
+        });
+      }
+      else {
+        $scope.movies = []
+      }
+    }
+
     $scope.loadPage = function(page) {
       MovieService.discover(page).success(function(movies){
         console.log(movies);
@@ -44,7 +73,6 @@ movieController.controller('MovieListCtrl', ['$scope', '$filter', '$routeParams'
     }
 
     $scope.loadPage($scope.page);
-    //$scope.order('release_date');
   }
 ]);
 
