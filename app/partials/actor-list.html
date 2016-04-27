@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row page-header" ng-show="actors.length">
+    <div class="col-md-3 pull-left">
+      <h4 class="text-primary" ng-show="search">Actor search results:</h4>
+    </div>
+    <div class="col-md-2 pull-right">
+      <a class="btn btn-default btn-primary" ng-click="order('name')">Sort By Name</a>
+    </div>
+  </div>
+
+  <center>
+    <div class="row" ng-show="actors.length">
+      <center ng-repeat="actor in actors">
+        <div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
+        <div class="clearfix visible-sm" ng-if="$index%3==0"></div>
+        <div class="col-md-3">
+          <h5>
+            <a href="#/actor/{{actor.id}}">{{actor.name}}</a><br/>
+            <small>Know for:
+              <a custom-popover popover-placement="right" popover-label=" {{ movie.title }}." ng-repeat="movie in actor.known_for"
+                data-content="<center>
+                        <h5 class='text-primary'>{{ movie.title }}<br/><small>Release Date: {{movie.release_date}}</small></h4>
+                        <div class='img-thumbnail thumbnail-movie-list'>
+                          <img class='img-movie-list' src='http://image.tmdb.org/t/p/w130/{{movie.poster_path}}' ng-show='movie.poster_path'/>
+                        </div>
+                        </center>" 
+                href="#/movie/{{movie.id}}">
+              </a>
+            </small>
+
+          </h5>
+          <div class="img-thumbnail thumbnail-actor-list col-middle">
+            <a href="#/actor/{{actor.id}}" >
+              <img ng-src="http://image.tmdb.org/t/p/w130/{{actor.profile_path}}" alt="{{actor.name}}" class="img-responsive img-actor-list" ng-show="actor.profile_path">
+              <img ng-src="img/no-user-image.jpg" alt="{{actor.name}}" class="img-responsive img-actor-list" ng-hide="actor.profile_path"/>
+            </a>
+          </div>
+        </div>
+      </center>
+    </div>
+    <div class="row" ng-hide="actors.length">
+      <h3 class="text-primary">We're sorry, no actors were found for your seach.</h3>
+    </div>
+    <br/>
+    <!--<button class="btn btn-default btn-primary" ng-click="loadBackPage()">Back</button>-->
+    <button class="btn btn-default btn-primary" ng-click="loadNextPage()" ng-if="actors.length">More</button>
+  </center>
+  <center>
+    <hr/>
+    <a class="text-primary" href="https://github.com/gaea/infopelis-angular" target="_blank">infopelis - </a>
+    <a class="text-primary" href="https://gaea-uv@blogspot.com" target="_blank">gaea-uv - </a>
+    <span class="text-primary">{{date | date:'yyyy'}}<br/><br/></a>
+  </center>
+</div>

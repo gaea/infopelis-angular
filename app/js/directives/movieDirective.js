@@ -4,7 +4,7 @@
 
 var movieDirective = angular.module('movieDirective', []);
 
-movieController.directive('movie', function() {
+movieController.directive('movies', function() {
   return {
   	restrict: 'E',
     templateUrl: 'js/directives/movie-directive.html'

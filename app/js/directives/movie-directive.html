@@ -1,0 +1,38 @@
+<div class="row page-header" ng-show="movies.length">
+    <div class="col-md-3 pull-left">
+      <h4 class="text-primary" ng-show="search">Movie search results:</h4>
+      <h4 class="text-primary" ng-hide="search">Discover Movies</h4>
+    </div>      
+    <div class="col-md-2 pull-right">
+      <a class="btn btn-default btn-primary" ng-click="order('release_date')">Sort By Release Date</a>
+    </div>
+    <div class="col-md-2 pull-right">
+      <a class="btn btn-default btn-primary" ng-click="order('title')">Sort By Title</a>
+    </div>
+  </div>
+
+  <center>
+    <div class="row" ng-show="movies.length">
+      <center ng-repeat="movie in movies">
+        <div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
+        <div class="clearfix visible-sm" ng-if="$index%3==0"></div>
+        <div class="col-md-3">
+          <h5>
+            <a href="#/movie/{{movie.id}}">{{movie.title}}</a><br/>
+            <small>Release date: {{movie.release_date}}</small>
+          </h5>
+          <div class="img-thumbnail col-middle">
+            <a href="#/movie/{{movie.id}}" >
+              <img ng-src="http://image.tmdb.org/t/p/w150/{{movie.poster_path}}" alt="{{movie.title}}" class="img-responsive" ng-show="movie.poster_path">
+              <img ng-src="img/no-movie-image.png" alt="{{movie.title}}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
+            </a>
+          </div>
+        </div>
+      </center>
+    </div>
+    <div class="row" ng-hide="movies.length">
+      <h3 class="text-primary">We're sorry, no movies were found for your seach.</h3>
+    </div>
+    <br/>
+    <button class="btn btn-default btn-primary" ng-click="loadNextPage()" ng-if="movies.length">More</button>
+  </center>

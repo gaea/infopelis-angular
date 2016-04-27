@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default" ng-show="movie">
@@ -41,7 +41,8 @@
 					<div class="row" class="row" ng-show="movie.images.backdrops.length">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Images</h4>
-							<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
+							<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
+							<!--<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
 								<center>
 									<div class="img-thumbnail col-middle">
 										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{poster.file_path}}" >
@@ -50,7 +51,7 @@
 										<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="poster.file_path"/>
 									</div>
 								</center>
-							</div>
+							</div>-->
 						</div>
 					</div>
 					<div class="row" class="row" ng-show="movie.trailers.youtube">

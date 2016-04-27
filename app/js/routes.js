@@ -11,6 +11,10 @@ infopelisRoutes.config(['$routeProvider',
         templateUrl: 'partials/movie-list.html',
         controller: 'MovieListCtrl'
       }).
+      when('/actors', {
+        templateUrl: 'partials/actor-list.html',
+        controller: 'ActorListCtrl'
+      }).
       when('/movie/:movieId', {
         templateUrl: 'partials/movie-detail.html',
         controller: 'MovieDetailCtrl'

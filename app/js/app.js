@@ -10,5 +10,6 @@ var infopelisApp = angular.module('infopelisApp', [
   'movieDirective',
   'infopelisConfigs',
   'infopelisRoutes',
-  'jkuri.gallery'
+  'jkuri.gallery',
+  'customDirectives'
 ]);
