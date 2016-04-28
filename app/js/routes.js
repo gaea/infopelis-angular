@@ -7,13 +7,17 @@ var infopelisRoutes = angular.module('infopelisRoutes', ['ngRoute']);
 infopelisRoutes.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/movies', {
+      when('/', {
         templateUrl: 'partials/movie-list.html',
         controller: 'MovieListCtrl'
       }).
-      when('/actors', {
+      when('/search/movies/:query', {
+        templateUrl: 'partials/movie-list.html',
+        controller: 'MovieSearchCtrl'
+      }).
+      when('/search/actors/:query', {
         templateUrl: 'partials/actor-list.html',
-        controller: 'ActorListCtrl'
+        controller: 'ActorSearchCtrl'
       }).
       when('/movie/:movieId', {
         templateUrl: 'partials/movie-detail.html',
@@ -24,7 +28,7 @@ infopelisRoutes.config(['$routeProvider',
         controller: 'ActorDetailCtrl'
       }).
       otherwise({
-        redirectTo: '/movies'
+        redirectTo: '/'
       });
   }
 ]); 

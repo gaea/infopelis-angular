@@ -61,3 +61,21 @@ img.ng-thumb {
 	overflow-x: scroll !important;
 	display: flex !important;
 }
+
+.timeline li {
+    margin: 20px !important;
+    position: relative;
+}
+
+.thumbnail-actor-movie-list {
+    width: 112px;
+    /* height: 190px; */
+}
+
+dt.movie-timeline {
+	width: 120px;
+}
+
+dd.movie-timeline {
+	margin-left: 130px;
+}

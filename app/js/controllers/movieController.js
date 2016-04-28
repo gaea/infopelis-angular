@@ -8,31 +8,10 @@ movieController.controller('MovieListCtrl', ['$scope', '$filter', '$routeParams'
   function($scope, $filter, $routeParams, MovieService) {
     $scope.movies = [];
     $scope.page = 1;
-    $scope.searchPage = 1;
-    $scope.search = false;
     $scope.date = new Date();
     $scope.predicate = 'release_date';
     $scope.reverse = false;
-    $scope.queryMovie = "";
     var orderBy = $filter('orderBy');
-    
-
-    $scope.loadNextPage = function() {
-      if($scope.queryMovie == "") {
-        $scope.page += 1;
-        $scope.loadPage($scope.page);
-      }
-      else {
-        $scope.searchMovie($scope.searchPage);
-      }
-    }
-
-    $scope.loadBackPage = function() {
-      if($scope.page > 1) {
-        $scope.page -= 1;
-        $scope.loadPage($scope.page);
-      }
-    }
 
     $scope.order = function(predicate) {
       $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
@@ -40,26 +19,11 @@ movieController.controller('MovieListCtrl', ['$scope', '$filter', '$routeParams'
 
       $scope.movies = orderBy($scope.movies, predicate, $scope.reverse);
     };
-
-    $scope.searchMovie = function(page) {
-      $scope.searchPage = page;
-
-      if($scope.queryMovie != "") {
-        MovieService.search($scope.queryMovie, page).success(function(movies){
-          if($scope.searchPage == 1) {
-            $scope.searchPage += 1;
-            $scope.movies = movies.results;
-          }
-          else {
-            $scope.searchPage += 1;
-            $scope.movies = $scope.movies.concat(movies.results);
-          }
-        }).error(function(error){
-          console.log(error.status_code + error.status_message);
-        });
-      }
-      else {
-        $scope.movies = []
+    
+    $scope.loadNextPage = function() {
+      if($scope.morePages) {
+        $scope.page += 1;
+        $scope.loadPage($scope.page);
       }
     }
 
@@ -67,6 +31,7 @@ movieController.controller('MovieListCtrl', ['$scope', '$filter', '$routeParams'
       MovieService.discover(page).success(function(movies){
         console.log(movies);
         $scope.movies = $scope.movies.concat(movies.results);
+        $scope.morePages = movies.total_pages > $scope.page;
       }).error(function(error){
         console.log(error.status_code + error.status_message);
       });
@@ -99,5 +64,41 @@ movieController.controller('MovieDetailCtrl', ['$scope', '$routeParams', 'MovieS
     $scope.setImage = function(imageUrl) {
       $scope.mainImageUrl = imageUrl;
     };
+  }
+]);
+
+movieController.controller('MovieSearchCtrl', ['$scope', '$filter', '$routeParams', 'MovieService',
+  function($scope, $filter, $routeParams, MovieService) {
+    $scope.movies = [];
+    $scope.page = 1;
+    $scope.search = true;
+    $scope.reverse = false;
+    $scope.morePages = false;
+    var orderBy = $filter('orderBy');
+
+    $scope.order = function(predicate) {
+      $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+      $scope.predicate = predicate;
+
+      $scope.movies = orderBy($scope.movies, predicate, $scope.reverse);
+    };
+
+    $scope.search = function (query, page) {
+      MovieService.search(query, page).success(function(movies){
+        $scope.movies = $scope.movies.concat(movies.results);
+        $scope.morePages = movies.total_pages > $scope.page;
+      }).error(function(error){
+        console.log(error.status_code + error.status_message);
+      });
+    }
+
+    $scope.loadNextPage = function() {
+      if($scope.morePages) {
+        $scope.page += 1;
+        $scope.search($routeParams.query, $scope.page);
+      }
+    }
+
+    $scope.search($routeParams.query, $scope.page);
   }
 ]);

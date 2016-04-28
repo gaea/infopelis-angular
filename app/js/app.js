@@ -7,9 +7,9 @@ var infopelisApp = angular.module('infopelisApp', [
   'movieService',
   'actorController',
   'actorService',
-  'movieDirective',
   'infopelisConfigs',
   'infopelisRoutes',
   'jkuri.gallery',
-  'customDirectives'
+  'customDirectives',
+  'angular-timeline'
 ]);

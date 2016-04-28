@@ -4,16 +4,40 @@
 
 var actorController = angular.module('actorController', []);
 
-actorController.controller('ActorListCtrl', ['$scope', '$routeParams', 'ActorService',
-  function($scope, $routeParams, ActorService) {
+actorController.controller('ActorSearchCtrl', ['$scope', '$filter', '$routeParams', 'ActorService',
+  function($scope, $filter, $routeParams, ActorService) {
     $scope.actors = [];
+    $scope.page = 1;
+    $scope.morePages = false;
+    $scope.reverse = false;
+    var orderBy = $filter('orderBy');
 
-    ActorService.search("cameron", 1).success(function(actors) {
-        console.log(actors);
-        $scope.actors = actors.results;
-      }).error(function(error){
-        console.log(error.status_code + error.status_message);
-    });
+    $scope.order = function(predicate) {
+      $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+      $scope.predicate = predicate;
+
+      $scope.actors = orderBy($scope.actors, predicate, $scope.reverse);
+    };
+    
+    $scope.search = function(query, page) {
+      ActorService.search($routeParams.query, page).success(function(actors) {
+          console.log(actors);
+          //$scope.actors = actors.results;
+          $scope.actors = $scope.actors.concat(actors.results);
+          $scope.morePages = actors.total_pages > $scope.page;
+        }).error(function(error){
+          console.log(error.status_code + error.status_message);
+      });
+    }
+
+    $scope.loadNextPage = function() {
+      if($scope.morePages) {
+        $scope.page += 1;
+        $scope.search($routeParams.query, $scope.page);
+      }
+    }
+
+    $scope.search($routeParams.query, $scope.page);
   }
 ]);
 
@@ -34,7 +58,6 @@ actorController.controller('ActorDetailCtrl', ['$scope', '$routeParams', 'ActorS
 
       $scope.fixedImages = fixedImages;
       $scope.actor = actor;
-      $scope.movies = actor.credits.cast;
     }).error(function(error){
       console.log(error.status_code + error.status_message);
     });

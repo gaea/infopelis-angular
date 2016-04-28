@@ -1,0 +1,29 @@
+<div class="page-header">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">InfoPelis - AngularJS</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="queryMovie" placeholder="Search by Movie's Title">
+            </div>
+            <a class="btn btn-default btn-primary" href="#/search/movies/{{queryMovie}}">Find Movies</a>
+          </form>
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="queryActor" placeholder="Search by Actor's Name">
+            </div>
+            <a class="btn btn-default btn-primary" href="#/search/actors/{{queryActor}}">Find Actors</a>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </div>

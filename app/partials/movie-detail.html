@@ -1,4 +1,5 @@
 <div class="container">
+	<search></search>
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default" ng-show="movie">
@@ -17,44 +18,29 @@
 						</div>
 						<div class="col-sm-9">
 							<dl class="dl-horizontal">
-								<dt>Original title</dt>
-								<dd>{{ movie.original_title }}</dd>
-								<dt>Overview</dt>
-								<dd>{{ movie.overview }}</dd>
-								<dt>Release date</dt>
-								<dd>{{ movie.release_date }}</dd>
-								<dt>Status</dt>
-								<dd>{{ movie.status }}</dd>
-								<dt>Homepage</dt>
-								<dd><a target="_blank" href="{{movie.homepage}}">{{movie.homepage}}</a></dd>
-								<dt>Genres</dt>
-								<dd><span ng-repeat="genre in movie.genres">{{ genre.name }}. </span></dd>
-								<dt>Cast</dt>
-								<dd>
-									<div ng-repeat="actor in movie.credits.cast">
-										<a href="#/actor/{{actor.id}}">{{actor.name}}</a>, {{actor.character}}
-									</div>
-								</dd>
+								<div ng-if="movie.original_title"><dt>Original title</dt><dd>{{ movie.original_title }}</dd></div>
+								<div ng-if="movie.overview"><dt>Overview</dt><dd>{{ movie.overview }}</dd></div>
+								<div ng-if="movie.release_date"><dt>Release date</dt><dd>{{ movie.release_date }}</dd></div>
+								<div ng-if="movie.status"><dt>Status</dt><dd>{{ movie.status }}</dd></div>
+								<div ng-if="movie.homepage"><dt>Homepage</dt><dd><a target="_blank" href="{{movie.homepage}}">{{movie.homepage}}</a></dd></div>
+								<div ng-if="movie.genres.length"><dt>Genres</dt><dd><span ng-repeat="genre in movie.genres">{{ genre.name }}. </span></dd></div>
+								<div ng-if="movie.credits.cast.length"><dt>Cast</dt>
+									<dd>
+										<div ng-repeat="actor in movie.credits.cast">
+											<a href="#/actor/{{actor.id}}">{{actor.name}}</a>, {{actor.character}}
+										</div>
+									</dd>
+								</div>
 							</dl>
 						</div>
 					</div>
-					<div class="row" class="row" ng-show="movie.images.backdrops.length">
+					<div class="row" class="row" ng-if="movie.images.backdrops.length">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Images</h4>
 							<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
-							<!--<div class="col-md-1" ng-repeat="poster in movie.images.backdrops | limitTo:36">
-								<center>
-									<div class="img-thumbnail col-middle">
-										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{poster.file_path}}" >
-											<img ng-src="http://image.tmdb.org/t/p/w300/{{poster.file_path}}" alt="{{movie.title}}" class="img-responsive">
-										</a>
-										<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="poster.file_path"/>
-									</div>
-								</center>
-							</div>-->
 						</div>
 					</div>
-					<div class="row" class="row" ng-show="movie.trailers.youtube">
+					<div class="row" class="row" ng-show="movie.trailers.youtube" ng-if="movie.images.backdrops.length">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Trailers</h4>
 							<div class="col-md-3" ng-repeat="trailer in movie.trailers.youtube | limitTo:12">
@@ -68,8 +54,8 @@
 							<div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
 							<div class="clearfix visible-sm" ng-if="$index%3==0"></div>
 							<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-								<a href="#/actor/{{actor.id}}"><h5>{{actor.name}}<br/><h5/></a>
-								<h5><small>{{actor.character}}</small></h5>
+								<h5><a href="#/actor/{{actor.id}}">{{actor.name}}<br/></a>
+								<small>{{actor.character}}</small></h5>
 								<div class="img-thumbnail thumbnail-actor-list col-middle">
 									<a href="#/actor/{{actor.id}}" >
 										<img class="img-responsive img-actor-list" ng-src="http://image.tmdb.org/t/p/w130/{{actor.profile_path}}" alt="{{actor.name}}" ng-show="actor.profile_path">

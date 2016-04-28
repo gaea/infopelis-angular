@@ -1,36 +1,6 @@
 <div class="container">
-  <div class="page-header">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">InfoPelis - AngularJS</a>
-        </div>
-        <div class="collapse navbar-collapse navbar-right">
-          <form class="navbar-form navbar-right" method="get">
-            <div class="form-group">
-              <input type="text" class="form-control" ng-model="queryMovie" placeholder="Search by Movie's Title">
-            </div>
-            <button type="submit" class="btn btn-default btn-primary" ng-click="searchMovie(1)">Find Movies</button>
-          </form>
-          <form class="navbar-form navbar-right" method="get">
-            <div class="form-group">
-              <input type="text" class="form-control" name="actor" placeholder="Search by Actor's Name">
-            </div>
-            <button type="submit" class="btn btn-default btn-primary">Find Actors</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-  </div>
-
+  <search></search>
   <movies></movies>
-  
   <center>
     <hr/>
     <a class="text-primary" href="https://github.com/gaea/infopelis-angular" target="_blank">infopelis - </a>

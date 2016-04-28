@@ -1,4 +1,5 @@
 <div class="container">
+	<search></search>
 	<div class="row">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-default" ng-show="actor">
@@ -11,72 +12,64 @@
 							<center>
 								<div class="img-thumbnail pull-right col-middle">
 									<img ng-src="https://image.tmdb.org/t/p/w300/{{ actor.profile_path }}" alt="{{ actor.name }}" class="img-responsive" ng-show="actor.profile_path"/>
-									<img ng-src="img/no-movie-image.png" alt="{{ actor.name }}" class="img-responsive img-no-movie" ng-hide="actor.profile_path"/>
+									<img ng-src="img/no-user-image.jpg" alt="{{ actor.name }}" class="img-responsive img-no-movie" ng-hide="actor.profile_path"/>
 								</div>
 							</center>
 						</div>
 						<div class="col-sm-9">
 							<dl class="dl-horizontal">
 								<dt>Name</dt><dd>{{ actor.name }}</dd>
-								<dt>Biography</dt><dd>{{ actor.biography }}</dd>
-								<dt>Birthday</dt><dd>{{ actor.birthday }}</dd>
-								<dt>Place of birth</dt><dd>{{ actor.place_of_birth }}</dd>
-								<dt>Homepage</dt><dd><a target="_blank" href="{{actor.homepage}}">{{actor.homepage}}</a></dd>
-								<dt>Also known as</dt>
+								<div ng-if="actor.biography"><dt>Biography</dt><dd>{{ actor.biography }}</dd></div>
+								<div ng-if="actor.birthday"><dt>Birthday</dt><dd>{{ actor.birthday }}</dd></div>
+								<div ng-if="actor.place_of_birth"><dt>Place of birth</dt><dd>{{ actor.place_of_birth }}</dd></div>
+								<div ng-if="actor.homepage"><dt>Homepage</dt><dd><a target="_blank" href="{{actor.homepage}}">{{ actor.homepage }}</a></dd></div>
+								<div ng-if="actor.also_known_as.length"><dt>Also known as</dt>
 								<dd>
 									<span ng-repeat="aka in actor.also_known_as">{{aka}}. </span>
-								</dd>
+								</dd></div>
 								<dt>Movies</dt>
 								<dd>
 									<div ng-repeat="movie in actor.credits.cast">
-										<a href="#/movie/{{movie.id}}">{{movie.title}}</a>, {{movie.character}} - {{movie.release_date}}
+										<a href="#/movie/{{movie.id}}">{{ movie.title }}</a>, {{ movie.character }} - {{ movie.release_date }}
 									</div>
 								</dd>
 							</dl>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" ng-if="fixedImages.length">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Images</h4>
 								<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
 							</div>
 						</div>
 					</div>
-					<!--<div class="row" ng-show="actor.images.profiles.length">
-						<div class="col-sm-12">
-							<h4 class="text-title text-center">Images</h4>
-							<div class="col-md-1" ng-repeat="image in actor.images.profiles | limitTo:36">
-								<center>
-									<div class="img-thumbnail col-middle">
-										<a target="_blank" href="http://image.tmdb.org/t/p/w1920/{{image.file_path}}" >
-											<img ng-src="http://image.tmdb.org/t/p/w300/{{image.file_path}}" alt="{{actor.name}}" class="img-responsive" ng-show="image.file_path">
-											<img ng-src="img/no-movie-image.png" alt="{{ actor.name }}" class="img-responsive img-no-movie" ng-hide="image.file_path"/>
-										</a>
-									</div>
-								</center>
-							</div>
-						</div>
-					</div>-->
 					<div class="row">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Movies</h4>
-							<center ng-repeat="movie in actor.credits.cast">
-								<div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
-								<div class="clearfix visible-sm" ng-if="$index%3==0"></div>
-								<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-									<a href="#/movie/{{movie.id}}"><h5>{{movie.title}}<br/>
-								    <small>{{movie.release_date}}</small><br/>
-								    <small>- {{movie.character}} -</small><br/>
-								    <h5></a>
-									<div class="img-thumbnail thumbnail-movie-list col-middle">
-										<a href="#/movie/{{movie.id}}" >
-											<img class="item img-responsive img-movie-list" ng-src="http://image.tmdb.org/t/p/w130/{{movie.poster_path}}" alt="{{movie.title}}" ng-show="movie.poster_path">
-											<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="item img-responsive img-no-movie-list" ng-hide="movie.poster_path"/>
-										</a>
-									</div>
-								</div>
-							</center>
-							<!--<movies></movies>-->
+							<timeline>
+							    <timeline-event ng-repeat="movie in actor.credits.cast | orderBy:'-release_date'" side="alternate">
+							      <timeline-badge class="info">
+							        <i class="glyphicon glyphicon-film"></i>
+							      </timeline-badge>
+							      <timeline-panel class="info">
+							      		<div class="col-md-12">
+									        <div class="img-thumbnail thumbnail-actor-movie-list col-middle col-md-1">
+												<a href="#/movie/{{movie.id}}" >
+													<img class="item img-responsive img-movie-list" ng-src="http://image.tmdb.org/t/p/w92/{{movie.poster_path}}" alt="{{movie.title}}" ng-show="movie.poster_path">
+													<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="item img-responsive img-no-movie-list" ng-hide="movie.poster_path"/>
+												</a>
+											</div>
+											<div class="col-md-9"><br/>
+													<dl class="dl-horizontal">
+														<dt class="movie-timeline">Movie</dt><dd class="movie-timeline">{{ movie.title }}</dd>
+														<dt class="movie-timeline">Release Date</dt><dd class="movie-timeline">{{ movie.release_date }}</dd>
+														<dt class="movie-timeline">Character</dt><dd class="movie-timeline">{{ movie.character }}</dd>
+													</dl>
+											</div>
+										</div>
+							      </timeline-panel>
+							    </timeline-event>
+							  </timeline>
 						</div>
 					</div>
 				</div>
