@@ -31,6 +31,10 @@ dt, dd {
 	width:140px; 
 	height:190px;
 }
+.thumbnail-detail-movie {
+	width:140px; 
+	height:350px;
+}
 .thumbnail-movie-list {
 	width:140px; 
 	height:190px;
@@ -47,7 +51,6 @@ dt, dd {
 	width:130px; 
 	height:180px;
 }
-
 img.ng-thumb {
     height: 150px !important;
     float: left !important;
@@ -55,27 +58,28 @@ img.ng-thumb {
     cursor: pointer !important;
     margin: 2px 15px 0 0 !important;
 }
-
 .ng-gallery {
 	height: 170px !important;
 	overflow-x: scroll !important;
 	display: flex !important;
 }
-
 .timeline li {
     margin: 20px !important;
     position: relative;
 }
-
 .thumbnail-actor-movie-list {
     width: 112px;
     /* height: 190px; */
 }
-
 dt.movie-timeline {
 	width: 120px;
 }
-
 dd.movie-timeline {
 	margin-left: 130px;
+}
+.flexslider {
+	margin: 0 !important;
+}
+.flexslider .slides img {
+    height: 350px !important;
 }

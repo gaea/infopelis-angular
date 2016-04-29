@@ -24,55 +24,58 @@
 								<div ng-if="actor.place_of_birth"><dt>Place of birth</dt><dd>{{ actor.place_of_birth }}</dd></div>
 								<div ng-if="actor.homepage"><dt>Homepage</dt><dd><a target="_blank" href="{{actor.homepage}}">{{ actor.homepage }}</a></dd></div>
 								<div ng-if="actor.also_known_as.length"><dt>Also known as</dt>
-								<dd>
-									<span ng-repeat="aka in actor.also_known_as">{{aka}}. </span>
-								</dd></div>
-								<dt>Movies</dt>
-								<dd>
-									<div ng-repeat="movie in actor.credits.cast">
-										<a href="#/movie/{{movie.id}}">{{ movie.title }}</a>, {{ movie.character }} - {{ movie.release_date }}
-									</div>
-								</dd>
+									<dd>
+										<span ng-repeat="aka in actor.also_known_as">{{aka}}. </span>
+									</dd>
+								</div>
+								<div ng-if="actor.credits.cast.length"><dt>Movies</dt>
+									<dd>
+										<div ng-repeat="movie in actor.credits.cast">
+											<a href="#/movie/{{movie.id}}">{{ movie.title }}</a>, {{ movie.character }} - {{ movie.release_date }}
+										</div>
+									</dd>
+								</div>
 							</dl>
 						</div>
 					</div>
 					<div class="row" ng-if="fixedImages.length">
 						<div class="col-sm-12">
 							<h4 class="text-title text-center">Images</h4>
-								<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
-							</div>
+							<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<h4 class="text-title text-center">Movies</h4>
-							<timeline>
-							    <timeline-event ng-repeat="movie in actor.credits.cast | orderBy:'-release_date'" side="alternate">
-							      <timeline-badge class="info">
-							        <i class="glyphicon glyphicon-film"></i>
-							      </timeline-badge>
-							      <timeline-panel class="info">
-							      		<div class="col-md-12">
-									        <div class="img-thumbnail thumbnail-actor-movie-list col-middle col-md-1">
+				</div>
+				<ul class="list-group">
+    				<li class="list-group-item">
+    					<div class="row">
+							<div class="col-sm-12">
+								<h4 class="text-title text-center">Movies</h4>
+								<timeline>
+									<timeline-event ng-repeat="movie in actor.credits.cast | orderBy:'-release_date'" side="alternate">
+										<timeline-badge class="primary">
+											<i class="glyphicon glyphicon-film"></i>
+										</timeline-badge>
+										<timeline-panel class="info">
+											<div class="img-thumbnail thumbnail-actor-movie-list col-middle col-md-1">
 												<a href="#/movie/{{movie.id}}" >
 													<img class="item img-responsive img-movie-list" ng-src="http://image.tmdb.org/t/p/w92/{{movie.poster_path}}" alt="{{movie.title}}" ng-show="movie.poster_path">
 													<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="item img-responsive img-no-movie-list" ng-hide="movie.poster_path"/>
 												</a>
 											</div>
 											<div class="col-md-9"><br/>
-													<dl class="dl-horizontal">
-														<dt class="movie-timeline">Movie</dt><dd class="movie-timeline">{{ movie.title }}</dd>
-														<dt class="movie-timeline">Release Date</dt><dd class="movie-timeline">{{ movie.release_date }}</dd>
-														<dt class="movie-timeline">Character</dt><dd class="movie-timeline">{{ movie.character }}</dd>
-													</dl>
+												<dl class="dl-horizontal">
+													<dt class="movie-timeline">Movie</dt><dd class="movie-timeline">{{ movie.title }}</dd>
+													<dt class="movie-timeline">Release Date</dt><dd class="movie-timeline">{{ movie.release_date }}</dd>
+													<dt class="movie-timeline">Character</dt><dd class="movie-timeline">{{ movie.character }}</dd>
+												</dl>
 											</div>
-										</div>
-							      </timeline-panel>
-							    </timeline-event>
-							  </timeline>
+										</timeline-panel>
+									</timeline-event>
+								</timeline>
+							</div>
 						</div>
-					</div>
-				</div>
+    				</li>
+    			<ul/>
 			</div>
 		</div>
 	</div>

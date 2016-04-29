@@ -10,10 +10,14 @@
 					<div class="row">
 						<div class="col-sm-3">
 							<center>
-								<div class="img-thumbnail pull-right col-middle">
-									<img ng-src="https://image.tmdb.org/t/p/w300/{{ movie.poster_path }}" alt="{{ movie.title }}" class="img-responsive" ng-show="movie.poster_path"/>
-									<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
-								</div>
+								<flex-slider flex-slide="poster in movie.images.posters track by $index" control-nav="false">
+								    <li>
+								    	<div class="img-thumbnail pull-right col-middle">
+								        	<img class="thumbnail-detail-movie" ng-src="https://image.tmdb.org/t/p/w300/{{poster.file_path}}">
+								        </div>
+								    </li>
+								</flex-slider>
+								<img ng-src="img/no-movie-image.png" alt="{{ movie.title }}" class="img-responsive img-no-movie" ng-hide="movie.poster_path"/>
 							</center>
 						</div>
 						<div class="col-sm-9">
@@ -34,39 +38,47 @@
 							</dl>
 						</div>
 					</div>
-					<div class="row" class="row" ng-if="movie.images.backdrops.length">
-						<div class="col-sm-12">
-							<h4 class="text-title text-center">Images</h4>
-							<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
-						</div>
-					</div>
-					<div class="row" class="row" ng-show="movie.trailers.youtube" ng-if="movie.images.backdrops.length">
-						<div class="col-sm-12">
-							<h4 class="text-title text-center">Trailers</h4>
-							<div class="col-md-3" ng-repeat="trailer in movie.trailers.youtube | limitTo:12">
-								<iframe width="100%" height="200" ng-src="{{'https://www.youtube.com/embed/' + trailer.source}}" frameborder="0" allowfullscreen></iframe>
+				</div>
+				<ul class="list-group">
+    				<li class="list-group-item">
+    					<div class="row" class="row" ng-if="fixedImages.length">
+							<div class="col-sm-12">
+								<h4 class="text-title text-center">Images</h4>
+								<ng-gallery style="height:200px" images="fixedImages" thumbs-num="{{fixedImages.length}}"></ng-gallery>
 							</div>
 						</div>
-					</div>
-					<h4 class="text-title text-center">Cast</h4>
-					<div class="row">
-						<center ng-repeat="actor in movie.credits.cast">
-							<div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
-							<div class="clearfix visible-sm" ng-if="$index%3==0"></div>
-							<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
-								<h5><a href="#/actor/{{actor.id}}">{{actor.name}}<br/></a>
-								<small>{{actor.character}}</small></h5>
-								<div class="img-thumbnail thumbnail-actor-list col-middle">
-									<a href="#/actor/{{actor.id}}" >
-										<img class="img-responsive img-actor-list" ng-src="http://image.tmdb.org/t/p/w130/{{actor.profile_path}}" alt="{{actor.name}}" ng-show="actor.profile_path">
-										<img ng-src="img/no-user-image.jpg" alt="{{ actor.name }}" class="img-responsive img-actor-list" ng-hide="actor.profile_path"/>
-									</a>
+    				</li>
+    				<li class="list-group-item">
+    					<div class="row" class="row" ng-show="movie.trailers.youtube" ng-if="movie.trailers.youtube.length">
+							<div class="col-sm-12">
+								<h4 class="text-title text-center">Trailers</h4>
+								<div class="col-md-3" ng-repeat="trailer in movie.trailers.youtube | limitTo:12">
+									<iframe width="100%" height="200" ng-src="{{'https://www.youtube.com/embed/' + trailer.source}}" frameborder="0" allowfullscreen></iframe>
 								</div>
 							</div>
-							
-						</center>
-					</div>
-				</div>
+						</div>
+    				</li>
+    				<li class="list-group-item">
+    					<div class="row">
+							<h4 class="text-title text-center">Cast</h4>
+							<center ng-repeat="actor in movie.credits.cast">
+								<div class="clearfix visible-md visible-lg" ng-if="$index%4==0"></div>
+								<div class="clearfix visible-sm" ng-if="$index%3==0"></div>
+								<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3">
+									<h5><a href="#/actor/{{actor.id}}">{{actor.name}}<br/></a>
+										<small>{{actor.character}}</small>
+									</h5>
+									<div class="img-thumbnail thumbnail-actor-list col-middle">
+										<a href="#/actor/{{actor.id}}" >
+											<img class="img-responsive img-actor-list" ng-src="http://image.tmdb.org/t/p/w130/{{actor.profile_path}}" alt="{{actor.name}}" ng-show="actor.profile_path">
+											<img ng-src="img/no-user-image.jpg" alt="{{ actor.name }}" class="img-responsive img-actor-list" ng-hide="actor.profile_path"/>
+										</a>
+									</div>
+								</div>
+							</center>
+						</div>
+    				</li>
+    			</ul>
 			</div>
 		</div>
 	</div>

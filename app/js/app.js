@@ -11,5 +11,6 @@ var infopelisApp = angular.module('infopelisApp', [
   'infopelisRoutes',
   'jkuri.gallery',
   'customDirectives',
-  'angular-timeline'
+  'angular-timeline',
+  'angular-flexslider'
 ]);

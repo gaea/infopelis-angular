@@ -16,13 +16,6 @@ customDirectives.directive('customPopover', function () {
     };
 });
 
-movieController.directive('movies', function() {
-  return {
-    restrict: 'E',
-    templateUrl: 'js/directives/movie-list-directive.html'
-  };
-});
-
 movieController.directive('search', function() {
   return {
     restrict: 'E',
