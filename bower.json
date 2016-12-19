@@ -1,23 +1,23 @@
 {
-  "name": "infopelis",
+  "name": "infopelis-angular",
   "description": "infopelis project using AngularJS!!!",
   "version": "0.0.1",
   "homepage": "https://github.com/gaea/infopelis-angular",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "1.4.x",
-    "angular-mocks": "1.4.x",
+    "angular": "~1.5.5",
+    "angular-mocks": "~1.5.5",
     "jquery": "~2.1.1",
     "bootstrap": "~3.1.1",
-    "angular-route": "1.4.x",
-    "angular-resource": "1.4.x",
-    "angular-animate": "1.4.x",
+    "angular-route": "~1.5.5",
+    "angular-resource": "~1.5.5",
+    "angular-animate": "~1.5.5",
     "ngGallery": "*",
     "angular-timeline": "1.6.2",
-    "angular-flexslider": "2.6.0"
+    "angular-flexslider": "*"
   },
   "resolutions": {
-    "angular": "1.5.5"
+    "angular": "1.5.x"
   }
 }
