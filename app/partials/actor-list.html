@@ -21,7 +21,7 @@
                 data-content="<center>
                         <h5 class='text-primary'>{{ movie.title }}<br/><small>Release Date: {{movie.release_date}}</small></h4>
                         <div class='img-thumbnail thumbnail-movie-list'>
-                          <img class='img-movie-list' src='http://image.tmdb.org/t/p/w130/{{movie.poster_path}}' ng-show='movie.poster_path'/>
+                          <img class='img-movie-list' src='https://image.tmdb.org/t/p/w130/{{movie.poster_path}}' ng-show='movie.poster_path'/>
                         </div>
                         </center>" 
                 href="#/movie/{{movie.id}}">
@@ -31,7 +31,7 @@
           </h5>
           <div class="img-thumbnail thumbnail-actor-list col-middle">
             <a href="#/actor/{{actor.id}}" >
-              <img ng-src="http://image.tmdb.org/t/p/w130/{{actor.profile_path}}" alt="{{actor.name}}" class="img-responsive img-actor-list" ng-show="actor.profile_path">
+              <img ng-src="https://image.tmdb.org/t/p/w130/{{actor.profile_path}}" alt="{{actor.name}}" class="img-responsive img-actor-list" ng-show="actor.profile_path">
               <img ng-src="img/no-user-image.jpg" alt="{{actor.name}}" class="img-responsive img-actor-list" ng-hide="actor.profile_path"/>
             </a>
           </div>

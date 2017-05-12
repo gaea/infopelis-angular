@@ -50,7 +50,7 @@ movieController.controller('MovieDetailCtrl', ['$scope', '$routeParams', 'MovieS
 
       for(var i=0; i<movie.images.backdrops.length; i++) {
           fixedImages.push({
-            thumb: 'http://image.tmdb.org/t/p/w300/' + movie.images.backdrops[i].file_path, img: 'http://image.tmdb.org/t/p/w1920' + movie.images.backdrops[i].file_path, description: 'Image ' + i
+            thumb: 'https://image.tmdb.org/t/p/w300/' + movie.images.backdrops[i].file_path, img: 'https://image.tmdb.org/t/p/w1920' + movie.images.backdrops[i].file_path, description: 'Image ' + i
           });
       }
 

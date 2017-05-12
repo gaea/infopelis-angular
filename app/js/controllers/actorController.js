@@ -50,7 +50,7 @@ actorController.controller('ActorDetailCtrl', ['$scope', '$routeParams', 'ActorS
 
       for(var i=0; i<actor.images.profiles.length; i++) {
           fixedImages.push({
-            thumb: 'http://image.tmdb.org/t/p/w150/' + actor.images.profiles[i].file_path, img: 'http://image.tmdb.org/t/p/w500/' + actor.images.profiles[i].file_path, description: 'Image ' + i
+            thumb: 'https://image.tmdb.org/t/p/w150/' + actor.images.profiles[i].file_path, img: 'https://image.tmdb.org/t/p/w500/' + actor.images.profiles[i].file_path, description: 'Image ' + i
           });
       }
 
