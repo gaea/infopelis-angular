@@ -41,3 +41,12 @@ FLEXSLIDER CHANGELOG
 
 2016.09.06 - Version 2.6.3
 * Rollback fade fixes, due to harsh fade reports.
+
+2018.02.01 - Version 2.7.0
+* Fixes resize method call for orientationchange.
+* Adds RTL feature - param "rtl" added.
+* Adds RTL demo's.
+
+2018.06.15 - Version 2.7.1
+* Firefox RTL fixes.
+* Adds "isFirefox" param.
